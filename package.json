@@ -1,0 +1,9 @@
+{
+  "name": "nexplay-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nexplay Proxy branded web launcher",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}
