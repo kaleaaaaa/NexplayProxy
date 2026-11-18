@@ -7,231 +7,51 @@
 <title>Nexplay Proxy</title>
 <style>
 :root {
-  --bg: #111318;
-  --panel: #191c24;
-  --panel2: #222632;
-  --border: #303542;
-  --text: #f4f5f8;
-  --muted: #969eae;
-  --accent: #6578ff;
+  --bg:#111318;--panel:#191c24;--panel2:#222632;
+  --border:#303542;--text:#f4f5f8;--muted:#969eae;
+  --accent:#6578ff;
 }
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Inter, Arial, sans-serif;
-}
-button, input { font: inherit; }
-button {
-  border: 0;
-  cursor: pointer;
-  color: var(--text);
-}
-.top {
-  height: 59px;
-  display: flex;
-  align-items: center;
-  padding: 0 19px;
-  gap: 12px;
-  background: #151820;
-  border-bottom: 1px solid var(--border);
-}
-.logo {
-  font-size: 20px;
-  font-weight: 850;
-  letter-spacing: -1px;
-}
-.logo span { color: var(--accent); }
-.status {
-  margin-left: auto;
-  color: #6cda9a;
-  font-size: 12px;
-}
-.tabs {
-  height: 43px;
-  display: flex;
-  align-items: stretch;
-  gap: 5px;
-  padding: 5px 10px 0;
-  background: #151820;
-  overflow-x: auto;
-}
-.tab {
-  min-width: 125px;
-  max-width: 210px;
-  padding: 0 12px;
-  background: #20242e;
-  border-radius: 8px 8px 0 0;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 12px;
-}
-.tab.active {
-  background: var(--bg);
-  color: var(--text);
-}
-.tab-name {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  flex: 1;
-  text-align: left;
-}
-.close {
-  background: transparent;
-  color: var(--muted);
-  padding: 2px;
-}
-.new-tab {
-  background: transparent;
-  color: var(--muted);
-  font-size: 21px;
-  padding: 0 10px;
-}
-.toolbar {
-  height: 57px;
-  padding: 8px 13px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-}
-.tool {
-  background: var(--panel2);
-  width: 37px;
-  height: 37px;
-  border-radius: 9px;
-  font-size: 17px;
-}
-.tool:hover { background: #343b4b; }
-.address-wrap {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  height: 38px;
-  padding: 0 12px;
-  gap: 9px;
-  min-width: 0;
-}
-.address-wrap:focus-within {
-  border-color: var(--accent);
-}
-.address-wrap span { color: #7f899b; }
-#address {
-  width: 100%;
-  min-width: 0;
-  border: 0;
-  outline: 0;
-  color: var(--text);
-  background: transparent;
-  font-size: 13px;
-}
-#address::placeholder { color: #788194; }
-.go {
-  background: var(--accent);
-  border-radius: 9px;
-  padding: 0 17px;
-  height: 37px;
-  font-weight: 700;
-}
-.go:hover { filter: brightness(1.12); }
-.workspace {
-  height: calc(100vh - 159px);
-  position: relative;
-  background: #fff;
-}
-#browserFrame {
-  border: 0;
-  width: 100%;
-  height: 100%;
-  display: none;
-  background: white;
-}
-.home {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background:
-    radial-gradient(ellipse at 50% 35%, #242a43 0%, #111318 65%);
-  padding: 25px;
-}
-.home-content {
-  width: min(650px, 100%);
-  text-align: center;
-  margin-top: -35px;
-}
-.home-logo {
-  font-size: clamp(42px, 8vw, 65px);
-  font-weight: 900;
-  letter-spacing: -4px;
-}
-.home-logo span { color: var(--accent); }
-.tagline {
-  color: var(--muted);
-  margin: 8px 0 28px;
-  font-size: 14px;
-}
-.search {
-  display: flex;
-  padding: 7px;
-  gap: 8px;
-  border-radius: 13px;
-  background: #202430;
-  border: 1px solid #353b4c;
-}
-.search input {
-  flex: 1;
-  min-width: 0;
-  padding: 0 12px;
-  color: white;
-  background: transparent;
-  border: 0;
-  outline: 0;
-  font-size: 14px;
-}
-.search button {
-  background: var(--accent);
-  border-radius: 9px;
-  padding: 12px 20px;
-  font-weight: 700;
-}
-.shortcuts {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 25px;
-}
-.shortcut {
-  background: #202430;
-  border: 1px solid #343a49;
-  border-radius: 10px;
-  padding: 11px 16px;
-  font-size: 12px;
-}
-.shortcut:hover { border-color: var(--accent); }
-.bottom {
-  height: 0;
-  display: none;
-}
-@media(max-width:600px) {
-  .top { padding: 0 12px; }
-  .status { font-size: 10px; }
-  .toolbar { padding: 7px; gap: 5px; }
-  .tool { width: 33px; height: 36px; }
-  .go { padding: 0 11px; }
-  .workspace { height: calc(100vh - 159px); }
-  .tab { min-width: 105px; }
+*{box-sizing:border-box}
+body{margin:0;height:100vh;overflow:hidden;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
+button,input{font:inherit}
+button{border:0;cursor:pointer;color:var(--text)}
+.top{height:59px;display:flex;align-items:center;padding:0 19px;gap:12px;background:#151820;border-bottom:1px solid var(--border)}
+.logo{font-size:20px;font-weight:850;letter-spacing:-1px}
+.logo span,.home-logo span{color:var(--accent)}
+.status{margin-left:auto;color:#969eae;font-size:12px}
+.tabs{height:43px;display:flex;align-items:stretch;gap:5px;padding:5px 10px 0;background:#151820;overflow-x:auto}
+.tab{min-width:125px;max-width:210px;padding:0 12px;background:#20242e;border-radius:8px 8px 0 0;color:var(--muted);display:flex;align-items:center;gap:9px;font-size:12px}
+.tab.active{background:var(--bg);color:var(--text)}
+.tab-name{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;flex:1;text-align:left}
+.close{background:transparent;color:var(--muted);padding:2px}
+.new-tab{background:transparent;color:var(--muted);font-size:21px;padding:0 10px}
+.toolbar{height:57px;padding:8px 13px;display:flex;align-items:center;gap:7px;background:var(--bg);border-bottom:1px solid var(--border)}
+.tool{background:var(--panel2);width:37px;height:37px;border-radius:9px;font-size:17px;flex-shrink:0}
+.tool:hover{background:#343b4b}
+.address-wrap{flex:1;display:flex;align-items:center;background:var(--panel);border:1px solid var(--border);border-radius:10px;height:38px;padding:0 12px;gap:9px;min-width:0}
+.address-wrap:focus-within{border-color:var(--accent)}
+.address-wrap span{color:#7f899b}
+#address{width:100%;min-width:0;border:0;outline:0;color:var(--text);background:transparent;font-size:13px}
+#address::placeholder{color:#788194}
+.go{background:var(--accent);border-radius:9px;padding:0 17px;height:37px;font-weight:700;flex-shrink:0}
+.go:hover{filter:brightness(1.12)}
+.workspace{height:calc(100vh - 159px);position:relative;background:#fff}
+#browserFrame{border:0;width:100%;height:100%;display:none;background:white}
+.home{height:100%;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 35%,#242a43 0%,#111318 65%);padding:25px}
+.home-content{width:min(650px,100%);text-align:center;margin-top:-35px}
+.home-logo{font-size:clamp(42px,8vw,65px);font-weight:900;letter-spacing:-4px}
+.tagline{color:var(--muted);margin:8px 0 28px;font-size:14px}
+.search{display:flex;padding:7px;gap:8px;border-radius:13px;background:#202430;border:1px solid #353b4c}
+.search input{flex:1;min-width:0;padding:0 12px;color:white;background:transparent;border:0;outline:0;font-size:14px}
+.search button{background:var(--accent);border-radius:9px;padding:12px 20px;font-weight:700}
+.shortcuts{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:25px}
+.shortcut{background:#202430;border:1px solid #343a49;border-radius:10px;padding:11px 16px;font-size:12px}
+.shortcut:hover{border-color:var(--accent)}
+@media(max-width:600px){
+.top{padding:0 12px}.status{font-size:10px}
+.toolbar{padding:7px;gap:5px}.tool{width:33px;height:36px}
+.go{padding:0 11px}.workspace{height:calc(100vh - 159px)}
+.tab{min-width:105px}
 }
 </style>
 </head>
@@ -252,8 +72,7 @@ button {
 
   <div class="address-wrap">
     <span>⌕</span>
-    <input id="address" placeholder="Search or enter a website address"
-      autocomplete="off" spellcheck="false">
+    <input id="address" placeholder="Search or enter a website address" autocomplete="off" spellcheck="false">
   </div>
 
   <button class="go" onclick="navigate()">Go</button>
@@ -281,14 +100,16 @@ button {
     </div>
   </section>
 
-  <iframe id="browserFrame"
-    title="Nexplay browsing area"
+  <iframe id="browserFrame" title="Nexplay browsing area"
     referrerpolicy="strict-origin-when-cross-origin"
     allow="fullscreen; autoplay; clipboard-read; clipboard-write">
   </iframe>
 </main>
 
 <script>
+// YOUR RENDER BACKEND ADDRESS
+const BACKEND = "https://nexplayproxy.onrender.com";
+
 const frame = document.getElementById("browserFrame");
 const home = document.getElementById("home");
 const address = document.getElementById("address");
@@ -298,214 +119,195 @@ let tabs = [];
 let activeTab = 0;
 let nextId = 1;
 
-function makeTab() {
-  const tab = {
-    id: nextId++,
-    title: "New Tab",
-    url: "",
-    history: [],
-    historyIndex: -1
-  };
-  tabs.push(tab);
-  activeTab = tabs.length - 1;
+function makeTab(){
+  tabs.push({id:nextId++,title:"New Tab",url:"",history:[],historyIndex:-1});
+  activeTab=tabs.length-1;
   renderTabs();
   showTab();
 }
 
-function current() {
-  return tabs[activeTab];
-}
+function current(){return tabs[activeTab]}
 
-function renderTabs() {
-  tabsElement.innerHTML = "";
+function renderTabs(){
+  tabsElement.innerHTML="";
+  tabs.forEach((tab,index)=>{
+    const button=document.createElement("button");
+    button.className="tab"+(index===activeTab?" active":"");
 
-  tabs.forEach((tab, index) => {
-    const button = document.createElement("button");
-    button.className = "tab" + (index === activeTab ? " active" : "");
+    const name=document.createElement("span");
+    name.className="tab-name";
+    name.textContent=tab.title;
 
-    const name = document.createElement("span");
-    name.className = "tab-name";
-    name.textContent = tab.title;
-
-    const close = document.createElement("span");
-    close.className = "close";
-    close.textContent = "×";
-    close.title = "Close tab";
-
-    close.onclick = (event) => {
+    const close=document.createElement("span");
+    close.className="close";
+    close.textContent="×";
+    close.title="Close tab";
+    close.onclick=event=>{
       event.stopPropagation();
       closeTab(index);
     };
 
-    button.append(name, close);
-    button.onclick = () => {
-      activeTab = index;
+    button.append(name,close);
+    button.onclick=()=>{
+      activeTab=index;
       renderTabs();
       showTab();
     };
-
     tabsElement.appendChild(button);
   });
 
-  const add = document.createElement("button");
-  add.className = "new-tab";
-  add.textContent = "+";
-  add.title = "New tab";
-  add.onclick = makeTab;
+  const add=document.createElement("button");
+  add.className="new-tab";
+  add.textContent="+";
+  add.title="New tab";
+  add.onclick=makeTab;
   tabsElement.appendChild(add);
 }
 
-function showTab() {
-  const tab = current();
+function proxyURL(url){
+  return BACKEND+"/api/proxy?url="+encodeURIComponent(url);
+}
 
-  if (!tab || !tab.url) {
-    frame.style.display = "none";
-    home.style.display = "flex";
-    address.value = "";
+function showTab(){
+  const tab=current();
+  if(!tab||!tab.url){
+    frame.style.display="none";
+    home.style.display="flex";
+    address.value="";
     return;
   }
-
-  home.style.display = "none";
-  frame.style.display = "block";
-  address.value = tab.url;
-  frame.src = BACKEND + "/api/proxy?url=" + encodeURIComponent(tab.url);
+  home.style.display="none";
+  frame.style.display="block";
+  address.value=tab.url;
+  frame.src=proxyURL(tab.url);
 }
 
-function normalize(input) {
-  input = input.trim();
-  if (!input) return "";
+function normalize(input){
+  input=input.trim();
+  if(!input)return "";
+  if(/^https?:\/\//i.test(input))return input;
 
-  if (/^https?:\/\//i.test(input)) return input;
-
-  if (/^(localhost|[\w-]+\.[a-z]{2,})(:\d+)?(\/.*)?$/i.test(input)) {
-    return "https://" + input;
+  if(/^(localhost|[\w-]+\.[a-z]{2,})(:\d+)?(\/.*)?$/i.test(input)){
+    return "https://"+input;
   }
 
-  return "https://www.google.com/search?q=" +
-    encodeURIComponent(input);
+  return "https://www.google.com/search?q="+encodeURIComponent(input);
 }
 
-function visit(value) {
-  const url = normalize(value);
-  if (!url) return;
+function visit(value){
+  const url=normalize(value);
+  if(!url)return;
 
-  const tab = current();
-  tab.history = tab.history.slice(0, tab.historyIndex + 1);
+  const tab=current();
+  tab.history=tab.history.slice(0,tab.historyIndex+1);
   tab.history.push(url);
-  tab.historyIndex = tab.history.length - 1;
-  tab.url = url;
+  tab.historyIndex=tab.history.length-1;
+  tab.url=url;
 
-  const hostname = (() => {
-    try { return new URL(url).hostname; }
-    catch { return "Website"; }
-  })();
-
-  tab.title = hostname;
+  try{tab.title=new URL(url).hostname}catch{tab.title="Website"}
   renderTabs();
   showTab();
 }
 
-function navigate() {
-  visit(address.value);
-}
+function navigate(){visit(address.value)}
 
-function searchHome(event) {
+function searchHome(event){
   event.preventDefault();
   visit(document.getElementById("homeSearch").value);
 }
 
-function goHome() {
-  const tab = current();
-  tab.url = "";
-  tab.title = "New Tab";
-  tab.history = [];
-  tab.historyIndex = -1;
+function goHome(){
+  const tab=current();
+  tab.url="";
+  tab.title="New Tab";
+  tab.history=[];
+  tab.historyIndex=-1;
   renderTabs();
   showTab();
 }
 
-function goBack() {
-  const tab = current();
-  if (tab.historyIndex > 0) {
+function goBack(){
+  const tab=current();
+  if(tab.historyIndex>0){
     tab.historyIndex--;
-    tab.url = tab.history[tab.historyIndex];
+    tab.url=tab.history[tab.historyIndex];
     renderTabs();
     showTab();
   }
 }
 
-function goForward() {
-  const tab = current();
-  if (tab.historyIndex < tab.history.length - 1) {
+function goForward(){
+  const tab=current();
+  if(tab.historyIndex<tab.history.length-1){
     tab.historyIndex++;
-    tab.url = tab.history[tab.historyIndex];
+    tab.url=tab.history[tab.historyIndex];
     renderTabs();
     showTab();
   }
 }
 
-function reloadPage() {
-  if (current().url) frame.src = current().url;
+function reloadPage(){
+  if(current().url){
+    frame.src=proxyURL(current().url);
+  }
 }
 
-function closeTab(index) {
-  if (tabs.length === 1) {
-    tabs = [];
+function closeTab(index){
+  if(tabs.length===1){
+    tabs=[];
     makeTab();
     return;
   }
-
-  tabs.splice(index, 1);
-  if (activeTab >= tabs.length) activeTab = tabs.length - 1;
-  else if (index < activeTab) activeTab--;
-
+  tabs.splice(index,1);
+  if(activeTab>=tabs.length)activeTab=tabs.length-1;
+  else if(index<activeTab)activeTab--;
   renderTabs();
   showTab();
 }
 
-function openExternal() {
-  if (current().url) {
-    window.open(current().url, "_blank", "noopener,noreferrer");
-  } else if (address.value.trim()) {
-    const url = normalize(address.value);
-    window.open(url, "_blank", "noopener,noreferrer");
+function openExternal(){
+  if(current().url){
+    window.open(current().url,"_blank","noopener,noreferrer");
+  }else if(address.value.trim()){
+    window.open(normalize(address.value),"_blank","noopener,noreferrer");
   }
 }
 
-function toggleFullscreen() {
-  if (!document.fullscreenElement) {
+function toggleFullscreen(){
+  if(!document.fullscreenElement){
     document.documentElement.requestFullscreen?.();
-  } else {
+  }else{
     document.exitFullscreen?.();
   }
 }
 
-address.addEventListener("keydown", event => {
-  if (event.key === "Enter") navigate();
+address.addEventListener("keydown",event=>{
+  if(event.key==="Enter")navigate();
 });
 
-async function checkBackend() {
-  const status = document.getElementById("status");
+async function checkBackend(){
+  const status=document.getElementById("status");
+  status.textContent="● Connecting...";
+  status.style.color="#969eae";
 
-  try {
-    const response = await fetch(
-      BACKEND + "/api/health",
-      { cache: "no-store" }
-    );
+  try{
+    const response=await fetch(BACKEND+"/api/health",{
+      method:"GET",
+      mode:"cors",
+      cache:"no-store"
+    });
 
-    const data = await response.json();
+    if(!response.ok)throw new Error("HTTP "+response.status);
 
-    if (!response.ok || !data.ok) {
-      throw new Error("Backend unavailable");
-    }
+    const data=await response.json();
+    if(!data.ok)throw new Error("Invalid health response");
 
-    status.textContent = "● Nexplay server online";
-    status.style.color = "#6cda9a";
-
-  } catch (error) {
-    status.textContent = "● Connection problem";
-    status.style.color = "#ff7777";
-    console.error(error);
+    status.textContent="● Nexplay server online";
+    status.style.color="#6cda9a";
+  }catch(error){
+    status.textContent="● Connection problem";
+    status.style.color="#ff7777";
+    console.error("Nexplay connection error:",error);
   }
 }
 
