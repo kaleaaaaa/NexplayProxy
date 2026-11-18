@@ -12,7 +12,6 @@ const PORT = process.env.PORT || 3000;
 const ROOT = __dirname;
 const MAX_BYTES = 8 * 1024 * 1024;
 const MAX_REDIRECTS = 5;
-const FRONTEND_ORIGIN = "*";
 const BACKEND_URL = "https://nexplayproxy.onrender.com";
 
 const MIME = {
@@ -28,7 +27,7 @@ const MIME = {
 };
 
 const CORS = {
-  "Access-Control-Allow-Origin": FRONTEND_ORIGIN,
+  "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type",
   "Access-Control-Max-Age": "86400"
@@ -153,7 +152,6 @@ function rewriteHTML(html, baseURL) {
   const $ = cheerio.load(html);
 
   $('meta[http-equiv="Content-Security-Policy"]').remove();
-
   $("base").remove();
 
   $("a[href], link[href], script[src], img[src], iframe[src], source[src], video[src], audio[src], form[action], input[src], object[data]").each((_, element) => {
@@ -276,12 +274,6 @@ const server = http.createServer(async (req, res) => {
     return sendError(res, 405, "Only GET and HEAD are supported.");
   }
 
-  const ip = req.socket.remoteAddress || "unknown";
-
-  if (!rateAllowed(ip)) {
-    return sendError(res, 429, "Too many requests. Please wait.");
-  }
-
   let pathname;
 
   try {
@@ -290,10 +282,13 @@ const server = http.createServer(async (req, res) => {
     return sendError(res, 400, "Invalid request.");
   }
 
+  // Health check runs before rate limiting.
   if (pathname === "/api/health") {
+    console.log("Nexplay health check received");
+
     res.writeHead(200, {
       ...CORS,
-      "Content-Type": "application/json",
+      "Content-Type": "application/json; charset=utf-8",
       "Cache-Control": "no-store"
     });
 
@@ -303,6 +298,12 @@ const server = http.createServer(async (req, res) => {
       engine: "Nexplay Custom Engine",
       status: "online"
     }));
+  }
+
+  const ip = req.socket.remoteAddress || "unknown";
+
+  if (!rateAllowed(ip)) {
+    return sendError(res, 429, "Too many requests. Please wait.");
   }
 
   if (pathname === "/api/proxy") {
@@ -315,6 +316,8 @@ const server = http.createServer(async (req, res) => {
       }
 
       validateURL(target);
+
+      console.log("Proxy request:", target);
 
       const result = await fetchWebsite(target);
       const contentType = String(
