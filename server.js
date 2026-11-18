@@ -117,7 +117,8 @@ function validateURL(input) {
 }
 
 function proxyURL(target) {
-  return "/api/proxy?url=" + encodeURIComponent(target);
+  return "https://nexplayproxy.onrender.com/api/proxy?url=" +
+    encodeURIComponent(target);
 }
 
 function rewriteCSS(css, baseURL) {
@@ -307,6 +308,7 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(200, {
       "Content-Type": "application/json",
       "Cache-Control": "no-store"
+      "Access-Control-Allow-Origin": "*",
     });
 
     return res.end(JSON.stringify({
