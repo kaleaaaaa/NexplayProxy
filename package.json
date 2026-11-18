@@ -1,9 +1,18 @@
+
 {
   "name": "nexplay-proxy",
   "version": "1.0.0",
-  "private": true,
-  "description": "Nexplay Proxy branded web launcher",
+  "description": "Nexplay Custom Web Proxy Engine",
   "main": "server.js",
-  "scripts": { "start": "node server.js" },
-  "engines": { "node": ">=18" }
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "ipaddr.js": "^2.2.0",
+    "undici": "^6.21.0"
+  }
 }
