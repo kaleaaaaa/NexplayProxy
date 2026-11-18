@@ -392,11 +392,11 @@ const server = http.createServer(async (req, res) => {
 
     const extension = path.extname(filePath).toLowerCase();
 
-    res.writeHead(200, {
-      "Content-Type": MIME[extension] || "application/octet-stream",
-      "X-Content-Type-Options": "nosniff",
-      "Cache-Control": "no-cache"
-    });
+res.writeHead(200, {
+  "Content-Type": "application/json",
+  "Cache-Control": "no-store",
+  "Access-Control-Allow-Origin": "*"
+});
 
     res.end(req.method === "HEAD" ? undefined : data);
   });
