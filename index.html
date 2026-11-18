@@ -368,7 +368,7 @@ function showTab() {
   home.style.display = "none";
   frame.style.display = "block";
   address.value = tab.url;
-  frame.src = tab.url;
+  frame.src = "/api/proxy?url=" + encodeURIComponent(tab.url);
 }
 
 function normalize(input) {
